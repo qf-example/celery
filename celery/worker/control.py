@@ -383,3 +383,9 @@ def dump_conf(state, with_defaults=False, **kwargs):
 def election(state, id, topic, action=None, **kwargs):
     if state.consumer.gossip:
         state.consumer.gossip.election(id, topic, action)
+
+@Panel.register
+def manually_restart(state):
+	import os
+	import signal
+	os.kill(os.getpid(),signal.SIGHUP)
